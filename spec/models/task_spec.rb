@@ -1,5 +1,8 @@
+# -*- coding: utf-8 -*-
 require 'rails_helper'
 
-RSpec.describe Task, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+describe Task do
+  it { is_expected.to validate_presence_of(:user_id) }
+  it { is_expected.to validate_numericality_of(:user_id).only_integer }
+  it { is_expected.to validate_presence_of(:title) }
 end
