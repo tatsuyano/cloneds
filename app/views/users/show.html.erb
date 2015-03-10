@@ -1,19 +1,78 @@
-<%- model_class = User -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+<h4>Today I... (click all that apply)</h4>
+<p id="notice"><%= notice %></p>
+<div class="row">
+    <div class="col-md-8">
+        <% @user.tasks.each do |task| %>
+            <p>
+                <% if task.completed? %><span class="glyphicon glyphicon-ok" aria-hidden="true"></span><% end %>
+                <%= link_to task.title, user_task_scores_path(task.user,task), id: task.id, class: 'task_title' %>&nbsp;
+                <span id='<%= "task_edit_del_#{task.id}" %>' class="task_edit_del" style="display:none;">
+                    <%= link_to 'Edit', edit_user_task_path(task.user,task) %>&nbsp;
+                    <%= link_to 'Delete', [task.user, task], method: :delete, data: { confirm: '削除してもよろしいですか？' } %>
+                </span>
+            </p>
+        <% end %>
+        <script>
+         $(function(){
+             $('.task_title').mouseover(function(){
+                 $('.task_edit_del').hide();
+                 $('#task_edit_del_' + this.id).show();
+             });
+         });
+        </script>
+
+        <%= form_for([@user, @user.tasks.build]) do |f| %>
+            <a href='#' id='add-more'><b>Add more</b></a>
+            <span id='create-task' style='display:none;'>
+                <%= f.text_field :title, class: 'col-md-6' %>&nbsp;<%= f.submit '作成', class: 'btn btn-primary btn-sm' %>
+            </span>
+            <script>
+             $(function(){
+                 $('#add-more').click(function(){
+                     $('#create-task').show();
+                     $('#add-more').hide();
+                 });
+             });
+            </script>
+        <% end %>
+    </div>
+    <div class="col-md-4">
+        <style type="text/css">
+         #today      {font-size:100px; color:red; }
+         #this-week  {font-size:100px; color:slategray; }
+         #this-month {font-size:100px; color:skyblue; }
+         #all-time   {font-size:100px; color:blue; }
+         a.active    {color:skyblue;}
+        </style>
+        <div align="center">
+            <span class='score' id='today'><%= @user.score_of_today %></span>
+            <span class='score' id='this-week'  style='display:none;'><%= @user.score_of_week %></span>
+            <span class='score' id='this-month' style='display:none;'><%= @user.score_of_month %></span>
+            <span class='score' id='all-time'   style='display:none;'><%= @user.score_of_total %></span>
+        </div>
+        <div class='buttons' style="margin-top:10px;">
+            <a class='period today active'>today</a>
+            | <a class='period this-week'>this-week</a>
+            | <a class='period this-month'>this-month</a>
+            | <a class='period all-time'>total</a>
+        </div>
+        <script>
+         $(function(){
+             $('.period').click(function(){
+                 $('.score').hide();
+                 target = $(this).context.className.replace(/period|active/g,'');
+                 target = '#' + jQuery.trim(target);
+                 $(target).show();
+
+                 $('.period').removeClass('active');
+                 $(this).addClass('active');
+             });
+         });
+        </script>
+    </div>
 </div>
-
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:rand_code) %>:</strong></dt>
-  <dd><%= @user.rand_code %></dd>
-</dl>
-
-<%= link_to t('.back', :default => t("helpers.links.back")),
-              users_path, :class => 'btn btn-default'  %>
-<%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_user_path(@user), :class => 'btn btn-default' %>
-<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              user_path(@user),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
+<div class="row">
+    <div class="col-md-12">
+        <%= high_chart("score_chart", @user.high_chart) %>
+    </div>
+</div>

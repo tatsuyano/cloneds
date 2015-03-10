@@ -1,5 +1,6 @@
+# -*- coding: utf-8 -*-
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:edit, :update, :destroy]
 
   # GET /users
   # GET /users.json
@@ -7,9 +8,15 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
-  # GET /users/1
-  # GET /users/1.json
+  # GET /users/rand_code
   def show
+    @user = User.where(rand_code: params[:rand_code]).first
+
+    if @user.blank?
+      @user = User.new # ユニークな値、rand_codeを自動生成
+      @user.save
+      redirect_to :action => 'show', :rand_code => @user.rand_code
+    end
   end
 
   # GET /users/new

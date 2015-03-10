@@ -16,6 +16,9 @@ gem 'therubyracer'
 gem 'less-rails'
 gem 'twitter-bootstrap-rails'
 
+# Charts  http://nishio.hateblo.jp/entry/2013/08/24/180112
+gem 'lazy_high_charts'
+
 group :development, :test do
   gem 'spring'
   gem 'pry-rails'
@@ -32,9 +35,9 @@ group :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
   gem 'shoulda-matchers', require: false # rspecで使うmatcher
-  gem "faker" , "~> 1.4.3"              # 名前やメールアドレス、その他のプレースホルダをファクトリに提供します
-  gem "database_cleaner" , "~> 1.3.0"   # まっさらな状態で各specが実行できるように、テストデータベースのデータを掃除します
-#  gem "capybara" , "~> 2.4.3"           # ユーザとWebアプリケーションのやりとりをプログラム上で簡単にシミュレートできるようにします
+  gem "faker" , "~> 1.4.3"              # 名前やメールアドレス、その他のプレースホルダをファクトリに提供
+  gem "database_cleaner" , "~> 1.3.0"   # まっさらな状態で各specが実行できるように、テストデータベースのデータを掃除
+#  gem "capybara" , "~> 2.4.3"           # ユーザとWebアプリケーションのやりとりをプログラム上でシミュレートできる
 #  gem "launchy" , "~> 2.4.2"            # 好きなタイミングでデフォルトのwebブラウザを開く
-#  gem "selenium-webdriver" , "~> 2.43.0"# ブラウザ上でJavaScriptを利用する機能をCapybaraでテストできるようにします
+#  gem "selenium-webdriver" , "~> 2.43.0"# ブラウザ上でJavaScriptを利用する機能をCapybaraでテストできる
 end
