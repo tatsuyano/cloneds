@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150309082734) do
+ActiveRecord::Schema.define(version: 20150310013304) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "scores", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "task_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "scores", ["task_id"], name: "index_scores_on_task_id", using: :btree
+  add_index "scores", ["user_id"], name: "index_scores_on_user_id", using: :btree
 
   create_table "tasks", force: :cascade do |t|
     t.string   "title"
@@ -31,5 +41,7 @@ ActiveRecord::Schema.define(version: 20150309082734) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "scores", "tasks"
+  add_foreign_key "scores", "users"
   add_foreign_key "tasks", "users"
 end
