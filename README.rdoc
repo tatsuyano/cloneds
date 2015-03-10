@@ -1,5 +1,3 @@
 == README
 
 This web application is what the site called [dayscore.net](http://dayscore.net/), made to imitate for study.
-
-herokuとの連携テスト
