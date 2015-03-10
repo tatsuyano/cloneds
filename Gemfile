@@ -41,3 +41,7 @@ group :test do
 #  gem "launchy" , "~> 2.4.2"            # 好きなタイミングでデフォルトのwebブラウザを開く
 #  gem "selenium-webdriver" , "~> 2.43.0"# ブラウザ上でJavaScriptを利用する機能をCapybaraでテストできる
 end
+
+group :production do
+  gem 'rails_12factor'
+end
