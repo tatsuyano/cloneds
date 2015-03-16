@@ -1,3 +1,18 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+$ ->
+  $(".task_title").mouseover ->
+    $(".task_edit_del").hide()
+    $("#task_edit_del_#{@id}").show()
+
+$ -> 
+  $('#add-more').click ->
+    $('#create-task').show()
+    $('#add-more').hide()
+
+$ ->
+  $('.period').click ->
+    $('.score').hide()
+    target = $(this).context.className.replace(/period|active/g,'')
+    target = "##{$.trim(target)}"
+    $(target).show()
+    $('.period').removeClass('active')
+    $(this).addClass('active')

@@ -12,28 +12,12 @@
                 </span>
             </p>
         <% end %>
-        <script>
-         $(function(){
-             $('.task_title').mouseover(function(){
-                 $('.task_edit_del').hide();
-                 $('#task_edit_del_' + this.id).show();
-             });
-         });
-        </script>
 
         <%= form_for([@user, @user.tasks.build]) do |f| %>
             <a href='#' id='add-more'><b>Add more</b></a>
             <span id='create-task' style='display:none;'>
                 <%= f.text_field :title, class: 'col-md-6' %>&nbsp;<%= f.submit '作成', class: 'btn btn-primary btn-sm' %>
             </span>
-            <script>
-             $(function(){
-                 $('#add-more').click(function(){
-                     $('#create-task').show();
-                     $('#add-more').hide();
-                 });
-             });
-            </script>
         <% end %>
     </div>
     <div class="col-md-4">
@@ -56,19 +40,6 @@
             | <a class='period this-month'>this-month</a>
             | <a class='period all-time'>total</a>
         </div>
-        <script>
-         $(function(){
-             $('.period').click(function(){
-                 $('.score').hide();
-                 target = $(this).context.className.replace(/period|active/g,'');
-                 target = '#' + jQuery.trim(target);
-                 $(target).show();
-
-                 $('.period').removeClass('active');
-                 $(this).addClass('active');
-             });
-         });
-        </script>
     </div>
 </div>
 <div class="row">
