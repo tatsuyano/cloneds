@@ -18,6 +18,11 @@ Bundler.require(*Rails.groups)
 module Cloneds
   class Application < Rails::Application
 
+    # Running rails app on heroku, can't see static pages in /public folder'
+    # https://devcenter.heroku.com/articles/rails-4-asset-pipeline
+    # http://stackoverflow.com/questions/11440377/running-rails-app-on-heroku-cant-see-static-pages-in-public-folder
+    config.serve_static_assets = true
+    
     # Glyphicons of Bootstrap3
     config.assets.paths << "#{Rails}/vendor/assets/fonts"
 
