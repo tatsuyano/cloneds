@@ -41,6 +41,11 @@ Rails.application.configure do
   # config.action_dispatch.x_sendfile_header = 'X-Sendfile' # for Apache
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX
 
+  # Rails 4 & Heroku: The Asset Pipeline Quandary
+  # https://medium.com/self-directed-learning/rails-4-heroku-the-asset-pipeline-quandary-9ba1f595102a
+  config.serve_static_assets = true
+  config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX
+
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
 
