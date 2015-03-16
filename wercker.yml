@@ -18,6 +18,9 @@ build:
       - script:
           name: Run RSpec
           code: bundle exec rspec
+      - script:
+          name: Pre compile
+          code: heroku run rake assets:precompile --app cloneds
 deploy:
     steps:
         - heroku-deploy:
@@ -25,6 +28,3 @@ deploy:
         - script:
             name: Update database
             code: heroku run rake db:migrate --app $APP_NAME
-        - script:
-            name: Precompile coffeescript
-            code: RAILS_ENV=production bundle exec rake assets:precompile
