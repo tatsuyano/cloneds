@@ -18,9 +18,6 @@ build:
       - script:
           name: Run RSpec
           code: bundle exec rspec
-      - script:
-          name: Pre compile
-          code: heroku run rake assets:precompile --app cloneds
 deploy:
     steps:
         - heroku-deploy:
