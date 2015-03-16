@@ -18,9 +18,6 @@ build:
       - script:
           name: Run RSpec
           code: bundle exec rspec
-      - script:
-          name: Precompile coffeescript
-          code: RAILS_ENV=production bundle exec rake assets:precompile
 deploy:
     steps:
         - heroku-deploy:
