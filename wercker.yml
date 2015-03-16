@@ -20,7 +20,7 @@ build:
           code: bundle exec rspec
       - script:
           name: Pre compile
-          code: rake assets:precompile
+          code: bundle exec rake assets:precompile
 deploy:
     steps:
         - heroku-deploy:
